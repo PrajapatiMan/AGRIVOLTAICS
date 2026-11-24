@@ -9,7 +9,6 @@ export const MetricSummaryBar: React.FC = () => {
   const { config } = useFarmConfig();
   const crop = CROP_PROFILES[config.cropType];
 
-  // Calculated geometry metrics assuming 1 Hectare (10,000 m²) standard reference field
   const totalFieldArea = 10000; // m²
   const rowCount = Math.floor(100 / config.rowPitch);
   const panelWidth = 2.0; // meters per module
@@ -18,7 +17,6 @@ export const MetricSummaryBar: React.FC = () => {
   const totalSurfaceArea = Math.round(totalPanels * panelWidth * 1.13); // m²
   const systemKWp = Math.round((totalPanels * 410) / 1000); // 410W panels
 
-  // Land Equivalent Ratio (LER) = PV Yield Ratio + Crop Yield Ratio (~1.35 to 1.60 for Agrivoltaics)
   const lerScore = (1.45 + (config.rowPitch > 4.5 ? 0.12 : -0.08)).toFixed(2);
 
   return (
