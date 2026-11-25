@@ -5,7 +5,7 @@
 
 
 
-# 🌱 Agrivoltaics – Micro-Zone Shadow Mapping & Precision Irrigation Engine   mahsakjsj cs
+# 🌱 Agrivoltaics – Micro-Zone Shadow Mapping & Precision Irrigation Engine
 
 An intelligent agrivoltaics planning and monitoring web application that helps users understand solar panel shadows over agricultural fields and plan more precise irrigation for different crop zones.
 
