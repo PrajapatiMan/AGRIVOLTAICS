@@ -29,4 +29,11 @@ export interface SolarPosition {
   altitudeDeg: number;// degrees
 }
 
-
+export interface ShadowCalculationResult {
+  shadowLength: number; // meters
+  dx: number;           // meters
+  dy: number;           // meters
+  altitude: number;     // solar elevation in radians
+  azimuth: number;      // solar azimuth in radians
+  isSunAboveHorizon: boolean;
+}
