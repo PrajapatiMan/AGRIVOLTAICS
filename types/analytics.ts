@@ -1,31 +1,75 @@
+/**
+ * Hourly solar and crop optimization data.
+ */
 export interface HourlyOptimizationData {
-  hour: string;           // "06:00", "07:00", etc.
-  solarKWh: number;       // Solar generation power in kWh
-  solarRevenue: number;   // $ Solar revenue generated
-  cropPAR: number;        // μmol/m²/s Photosynthetically Active Radiation
-  targetPAR: number;      // μmol/m²/s Optimal PAR requirement
-  heatStressRisk: boolean;// True if ambient solar irradiance causes crop heat stress
-  shadePercentage: number;// % Shade cast over crop canopy
+  hour: string;
+  solarKWh: number;
+  solarRevenue: number;
+  cropPAR: number;
+  targetPAR: number;
+  heatStressRisk: boolean;
+  shadePercentage: number;
+}
+
+/**
+ * Irrigation schedule for an individual farm zone.
+ */
+export interface ZoneSchedule {
+  zoneId: string;
+  zoneName: string;
+
+  /** Shade ratio from 0 (no shade) to 1 (100% shade). */
+  shadeRatio: number;
+
+  baseWaterVolumeLiters: number;
+  calculatedWaterVolumeLiters: number;
+  valveRuntimeMinutes: number;
+  waterSavingsPercent: number;
+
+  manualOverride: boolean;
+  soilMoisturePercent: number;
+}
+
+/**
+ * Economic results of the co-optimization strategy.
+ */
+export interface CoOptStrategy {
+  /** Strategy weight from 0 (agriculture priority) to 100 (PV priority). */
+  strategyWeight: number;
+
+  dailySolarRevenue: number;
+  dailyCropValue: number;
+  heatPenalty: number;
+  netGainDollars: number;
+
+  pvPriorityPercent: number;
+  agriPriorityPercent: number;
+}
+
+export type Percentage = number;
+export type Ratio = number;
+
+/**
+ * Hourly solar and crop optimization data.
+ */
+export interface HourlyOptimizationData {
+  hour: string;
+  solarKWh: number;
+  solarRevenue: number;
+  cropPAR: number;
+  targetPAR: number;
+  heatStressRisk: boolean;
+  shadePercentage: Percentage;
 }
 
 export interface ZoneSchedule {
   zoneId: string;
   zoneName: string;
-  shadeRatio: number;               // 0.0 to 1.0 (0% to 100% shadow accumulation)
+  shadeRatio: Ratio;
   baseWaterVolumeLiters: number;
   calculatedWaterVolumeLiters: number;
   valveRuntimeMinutes: number;
-  waterSavingsPercent: number;
+  waterSavingsPercent: Percentage;
   manualOverride: boolean;
-  soilMoisturePercent: number;
-}
-
-export interface CoOptStrategy {
-  strategyWeight: number;    // 0 = 100% Agri Priority, 100 = 100% PV Priority
-  dailySolarRevenue: number; // $ Total daily solar revenue
-  dailyCropValue: number;    // $ Estimated daily crop value
-  heatPenalty: number;       // $ Revenue lost to crop heat stress
-  netGainDollars: number;    // Net optimized economic output ($)
-  pvPriorityPercent: number; // % Priority allocated to PV energy generation
-  agriPriorityPercent: number;// % Priority allocated to under-canopy crop yield
+  soilMoisturePercent: Percentage;
 }
